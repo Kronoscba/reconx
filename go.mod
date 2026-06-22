@@ -1,3 +1,3 @@
-module reconx.tmp.11724
+module reconx
 
 go 1.26.4

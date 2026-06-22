@@ -1,0 +1,2 @@
+[console_scripts]
+cloud_enum = cloud_enum:main

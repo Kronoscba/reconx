@@ -1,9 +1,52 @@
+# Binaries and Executables
+reconx
+bin/
+obj/
+*.exe
+*.out
+*.app
+*.dll
+*.so
+
+# Secrets and Configuration
 .env
 *.pem
 *.key
+configs/*/
+# Exception for examples
+!configs/*.example.yaml
+!configs/provider-config.example.yaml
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+
+# Logs, Reports and Run Artifacts
+logs/
+reports/
+screenshots/
+output/
+*.log
+# Root run artifacts
+*.json
+subdomains.txt
+alive.txt
+session
+
+# OS and IDEs
 .DS_Store
+Thumbs.db
 .vscode/
 .idea/
-*.log
-*.exe
-*.out
+*.swp
+*.swo
+
+# Go
+go.sum
+# Only if you want to ignore it, but usually go.sum is committed. 
+# I'll keep it committed as per Go standards.
