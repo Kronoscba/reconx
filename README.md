@@ -2,6 +2,7 @@
 
 ![Go Version](https://img.shields.io/badge/language-go-00ADDR?logo=go)
 ![Python Version](https://img.shields.io/badge/language-python-37695E?logo=python)
+![CI](https://github.com/Kronoscba/reconx/actions/workflows/ci.yml/badge.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Status](https://img.shields.io/badge/status-production-green)
 ![Security](https://img.shields.io/badge/type-Security%20Framework-red)
@@ -44,14 +45,15 @@ ReconX orchestrates 17 specialized phases to provide a complete view of the targ
 
 ## 🛠️ Installation
 
-### Prerequisites
-- **Go** (latest stable)
-- **Python 3.x** (with `uv` for fast dependency management)
+### 📦 Quick Install (Recommended)
+Download the latest pre-compiled binary for your OS from the [Releases](https://github.com/Kronoscba/reconx/releases) page.
 
-### Setup
+### 💻 Build from Source
+**Prerequisites**: Go (latest stable), Python 3.x (with `uv`).
+
 ```bash
 # Clone the repository
-git clone https://github.com/youruser/reconx.git
+git clone https://github.com/Kronoscba/reconx.git
 cd reconx
 
 # Build the binary
@@ -62,6 +64,13 @@ go build -o reconx cmd/reconx/main.go
 ```
 
 ---
+
+## 🤖 CI/CD & Automation
+
+ReconX utilizes GitHub Actions to maintain industrial software standards:
+
+- **Continuous Integration**: Every push and PR is automatically validated through linting, unit testing, and build checks to ensure stability.
+- **Automated Multi-Platform Releases**: On every version tag (`v*`), the framework is cross-compiled for **Linux, macOS, and Windows (amd64 & arm64)** and uploaded automatically to GitHub Releases.
 
 ## 📖 Usage Examples
 
