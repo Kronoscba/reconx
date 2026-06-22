@@ -13,10 +13,10 @@ import (
 )
 
 type DiffResult struct {
-	NewHosts   []string `json:"new_hosts"`
-	Removed    []string `json:"removed_hosts"`
-	NewTech    []string `json:"new_technologies"`
-	NewPorts   int      `json:"new_ports"`
+	NewHosts []string `json:"new_hosts"`
+	Removed  []string `json:"removed_hosts"`
+	NewTech  []string `json:"new_technologies"`
+	NewPorts int      `json:"new_ports"`
 }
 
 type DiffingTask struct{}
@@ -36,7 +36,7 @@ func (t *DiffingTask) Execute(ctx context.Context, session *engine.Session) erro
 
 	// Look for a previous scan snapshot in the parent directory
 	backupDir := filepath.Join(parentDir, domain+"_previous")
-	
+
 	logging.Log.Info("Running Attack Surface Diffing", "current", currentDir, "previous", backupDir)
 
 	if _, err := os.Stat(backupDir); os.IsNotExist(err) {

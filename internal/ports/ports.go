@@ -20,14 +20,14 @@ func (t *PortScanTask) RequiredTools() []string {
 func (t *PortScanTask) Execute(ctx context.Context, session *engine.Session) error {
 	aliveFile := session.Config.GetPath("alive.txt")
 	portsJsonFile := session.Config.GetPath("ports.json")
-	
+
 	logging.Log.Info("Running Port Discovery", "input", aliveFile)
-	
+
 	cmd := exec.CommandContext(ctx, "naabu", "-hL", aliveFile, "-json", "-o", portsJsonFile)
 	if err := cmd.Run(); err != nil {
 		return err
 	}
-	
+
 	logging.Log.Info("Port discovery complete", "output", portsJsonFile)
 	return nil
 }

@@ -27,13 +27,19 @@ func (t *DiscoveryTask) Execute(ctx context.Context, session *engine.Session) er
 
 	go func() {
 		res, err := RunSubfinder(session.Target)
-		if err != nil { errChan <- err; return }
+		if err != nil {
+			errChan <- err
+			return
+		}
 		resultsChan <- res
 	}()
 
 	go func() {
 		res, err := RunAssetfinder(session.Target)
-		if err != nil { errChan <- err; return }
+		if err != nil {
+			errChan <- err
+			return
+		}
 		resultsChan <- res
 	}()
 
@@ -50,7 +56,7 @@ func (t *DiscoveryTask) Execute(ctx context.Context, session *engine.Session) er
 	}
 
 	session.Subdomains = Deduplicate(allSubdomains)
-	
+
 	subsFile := session.Config.GetPath("subdomains.txt")
 	if err := SaveResults(subsFile, session.Subdomains); err != nil {
 		return err
@@ -62,7 +68,7 @@ func (t *DiscoveryTask) Execute(ctx context.Context, session *engine.Session) er
 
 func RunTool(name string, args []string) ([]string, error) {
 	logging.Log.Debug("Running tool", "tool", name, "args", args)
-	
+
 	cmd := exec.Command(name, args...)
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {

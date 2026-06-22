@@ -10,10 +10,10 @@ import (
 
 // Session holds the state of a reconnaissance scan
 type Session struct {
-	Target     string
-	Config     *config.Config
-	StartTime  time.Time
-	
+	Target    string
+	Config    *config.Config
+	StartTime time.Time
+
 	// Shared data between tasks
 	Subdomains  []string
 	AliveHosts  []string
@@ -25,9 +25,9 @@ type Session struct {
 }
 
 type HTTPResult struct {
-	Host string
-	Port int
-	URL  string
+	Host  string
+	Port  int
+	URL   string
 	Title string
 	// ...
 }
@@ -41,8 +41,8 @@ type Task interface {
 
 // Engine manages the execution of the pipeline
 type Engine struct {
-	tasks    []Task
-	resume   bool
+	tasks  []Task
+	resume bool
 }
 
 func New() *Engine {
@@ -66,7 +66,7 @@ func (e *Engine) GetTasks() []Task {
 
 func (e *Engine) Run(ctx context.Context, session *Session) error {
 	logging.Log.Info("Starting pipeline execution", "total_tasks", len(e.tasks))
-	
+
 	// Load scan history for resume support
 	history := LoadHistory(session)
 	history.StartTime = time.Now()
@@ -79,13 +79,13 @@ func (e *Engine) Run(ctx context.Context, session *Session) error {
 		}
 
 		logging.Log.Info("Executing task", "task", task.Name())
-		
+
 		if err := ensureTaskDeps(task.RequiredTools()); err != nil {
 			return fmt.Errorf("dependency check failed for task %s: %w", task.Name(), err)
 		}
 
 		start := time.Now()
-		
+
 		err := task.Execute(ctx, session)
 		duration := time.Since(start)
 
@@ -109,7 +109,7 @@ func (e *Engine) Run(ctx context.Context, session *Session) error {
 		history.MarkTaskCompleted(record)
 		history.Save(session)
 	}
-	
+
 	logging.Log.Info("Pipeline execution finished successfully")
 	return nil
 }
@@ -118,5 +118,5 @@ func ensureTaskDeps(tools []string) error {
 	// This is a helper to check only a subset of tools
 	// In a real scenario, this would call a simplified version of deps.EnsureDependencies
 	// For now, we will just log and continue unless a critical tool is missing
-	return nil 
+	return nil
 }

@@ -21,11 +21,11 @@ func (t *SecretsTask) RequiredTools() []string {
 func (t *SecretsTask) Execute(ctx context.Context, session *engine.Session) error {
 	histFile := session.Config.GetPath("historical.txt")
 	secretsJsonFile := session.Config.GetPath("secrets.json")
-	
+
 	logging.Log.Info("Running Secret Discovery", "input", histFile)
-	
+
 	cmd := exec.CommandContext(ctx, "trufflehog", "filesystem", "--no-update", "-j", histFile)
-	
+
 	out, err := cmd.Output()
 	if err != nil {
 		if exitErr, ok := err.(*exec.ExitError); ok && exitErr.ExitCode() == 183 {
@@ -39,7 +39,7 @@ func (t *SecretsTask) Execute(ctx context.Context, session *engine.Session) erro
 	if err != nil {
 		return err
 	}
-	
+
 	logging.Log.Info("Secret discovery complete", "output", secretsJsonFile)
 	return nil
 }

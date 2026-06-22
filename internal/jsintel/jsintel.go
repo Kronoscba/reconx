@@ -24,9 +24,9 @@ func (t *JSIntelTask) RequiredTools() []string {
 func (t *JSIntelTask) Execute(ctx context.Context, session *engine.Session) error {
 	crawlJsonFile := session.Config.GetPath("crawl.json")
 	jsFile := session.Config.GetPath("javascript.txt")
-	
+
 	logging.Log.Info("Running JS Intelligence", "input", crawlJsonFile)
-	
+
 	jsList, err := extractJSUrls(crawlJsonFile)
 	if err != nil {
 		return fmt.Errorf("failed to extract JS URLs: %w", err)
@@ -37,7 +37,7 @@ func (t *JSIntelTask) Execute(ctx context.Context, session *engine.Session) erro
 	if err := cmd.Run(); err != nil {
 		return err
 	}
-	
+
 	logging.Log.Info("JS intelligence complete", "output", jsFile)
 	return nil
 }
@@ -75,7 +75,7 @@ func extractJSUrls(crawlFile string) (string, error) {
 			}
 		}
 	}
-	
+
 	logging.Log.Debug("Extracted JS files", "count", count, "file", jsListFile)
 	return jsListFile, nil
 }

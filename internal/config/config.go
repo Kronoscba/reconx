@@ -6,9 +6,9 @@ import (
 )
 
 type Config struct {
-	Debug      bool
-	OutputDir  string
-	Target     string
+	Debug     bool
+	OutputDir string
+	Target    string
 }
 
 func Load(target string) *Config {

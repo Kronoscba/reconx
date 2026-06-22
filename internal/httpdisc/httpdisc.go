@@ -21,16 +21,16 @@ func (t *HTTPDiscoveryTask) Execute(ctx context.Context, session *engine.Session
 	aliveFile := session.Config.GetPath("alive.txt")
 	httpAliveFile := session.Config.GetPath("http_alive.txt")
 	httpJsonFile := session.Config.GetPath("http.json")
-	
+
 	logging.Log.Info("Running HTTP Discovery", "input", aliveFile)
-	
+
 	cmd := exec.CommandContext(ctx, "httpx", "-l", aliveFile, "-silent", "-o", httpAliveFile)
 	if err := cmd.Run(); err != nil {
 		return err
 	}
-	
+
 	exec.CommandContext(ctx, "httpx", "-l", aliveFile, "-json", "-o", httpJsonFile).Run()
-	
+
 	logging.Log.Info("HTTP discovery complete", "output", httpAliveFile)
 	return nil
 }
