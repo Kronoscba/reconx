@@ -39,7 +39,7 @@ ReconX orchestrates 17 specialized phases to provide a complete view of the targ
 | **9-11** | **Secrets & Cloud** | `trufflehog`, `cloud-enum`, `uncover` | `secrets.json`, `cloud.json`, `osint.json` |
 | **12** | **Visual Recon** | `gowitness` | `screenshots/`, `index.html` |
 | **13** | **Vuln Discovery** | `nuclei` | `nuclei.json` |
-| **14-17** | **Analysis & Ops** | Internal Engine | `report.md`, `diff.json`, `history.db` |
+| **14-17** | **Analysis & Ops** | Internal Engine | `report.md`, `diff.md`, `.scan_history.json` |
 
 ---
 
